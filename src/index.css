@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap");
+@import "tailwindcss";
+
+/* ───────────────────────────────────────────────────────────
+   FLEET design tokens — cream / royal blue / sun yellow / tomato
+   (inspired by chunky, friendly food-brand sites)
+   ─────────────────────────────────────────────────────────── */
+@theme {
+  --color-cream: #fff4dc;
+  --color-paper: #fffaf0;
+  --color-royal: #4a6fd1;
+  --color-royal-deep: #2b4bb0;
+  --color-royal-dark: #3459bd;
+  --color-sky: #cfdcff;
+  --color-sun: #fbd24d;
+  --color-tomato: #e8402a;
+  --color-lilac: #c9a8ea;
+  --color-ink: #15120f;
+  /* aliases used by the earlier section components */
+  --color-cobalt: #4a6fd1;
+  --color-cobalt-deep: #2b4bb0;
+  --color-mint: #9be3b4;
+
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-cond: "Anton", "Impact", sans-serif;
+  --font-sans: "Space Mono", ui-monospace, monospace;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-marquee-slow: marquee 70s linear infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-float: float 5s ease-in-out infinite;
+  --animate-wiggle: wiggle 2.4s ease-in-out infinite;
+  --animate-pop: pop 0.45s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+  --animate-ping-slow: ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-bob: bob 3.2s ease-in-out infinite;
+  --animate-pulse-dot: pulse-dot 1.6s ease-in-out infinite;
+
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.35; transform: scale(0.75); }
+  }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(-1deg); }
+    50% { transform: translateY(-10px) rotate(1deg); }
+  }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(-4deg); }
+    50% { transform: rotate(4deg); }
+  }
+  @keyframes pop {
+    from { transform: scale(0.6); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-sun);
+  color: var(--color-ink);
+}
+
+/* White ceramic tile with royal grout lines */
+.bg-tiles {
+  background-color: #f6f8fd;
+  background-image:
+    linear-gradient(var(--color-royal) 3px, transparent 3px),
+    linear-gradient(90deg, var(--color-royal) 3px, transparent 3px);
+  background-size: 140px 140px;
+  background-position: -1px -1px;
+}
+
+/* Big oversized "F" monogram wallpaper on royal blue */
+.bg-monogram {
+  background-color: var(--color-royal);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Ctext x='20' y='210' font-family='Arial Black,Impact,sans-serif' font-weight='900' font-size='240' fill='%234569cb'%3EF%3C/text%3E%3C/svg%3E");
+  background-size: 260px 260px;
+}
+
+.hard {
+  box-shadow: 6px 6px 0 0 var(--color-ink);
+}
+.hard-sm {
+  box-shadow: 3px 3px 0 0 var(--color-ink);
+}
+
+/* Buttons: chunky pills with a press effect */
+.pill,
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 9999px;
+  padding: 0.95rem 1.8rem;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  line-height: 1;
+  white-space: nowrap;
+  cursor: pointer;
+  border: 0;
+  transition: transform 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+}
+.pill:hover,
+.btn:hover {
+  transform: translateY(-2px) rotate(-1deg);
+}
+.pill:active,
+.btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+.pill:disabled,
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+}
+.pill-royal { background: var(--color-royal); color: var(--color-cream); }
+.pill-royal:hover { background: var(--color-royal-deep); }
+.pill-cream { background: var(--color-cream); color: var(--color-ink); }
+.pill-cream:hover { background: #fff; }
+.pill-sun { background: var(--color-sun); color: var(--color-ink); }
+.pill-ink { background: var(--color-ink); color: var(--color-cream); }
+.pill-tomato { background: var(--color-tomato); color: var(--color-cream); }
+/* .btn = same chunky pill, used by the interactive demos */
+.btn-blue { background: var(--color-royal); color: var(--color-cream); }
+.btn-blue:hover { background: var(--color-royal-deep); }
+.btn-sun { background: var(--color-sun); color: var(--color-ink); }
+.pill-outline { background: transparent; color: var(--color-ink); box-shadow: inset 0 0 0 2px var(--color-ink); }
+
+/* Range sliders */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 12px;
+  border-radius: 9999px;
+  background: var(--color-ink);
+  outline: none;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 9999px;
+  background: var(--color-sun);
+  border: 3px solid var(--color-ink);
+  cursor: grab;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 9999px;
+  background: var(--color-sun);
+  border: 3px solid var(--color-ink);
+  cursor: grab;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
